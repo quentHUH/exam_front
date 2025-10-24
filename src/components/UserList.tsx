@@ -9,6 +9,7 @@ export const UserList = () => {
   const [users, setUsers] = useState<User[]>([])
   const [ loading, setLoading ] = useState<boolean>(true);
   const [ error, setError ] = useState<string | null>(null);
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     let mounted = true
@@ -21,18 +22,38 @@ export const UserList = () => {
     return () => { mounted = false }
   }, [])
 
+  
+  const filteredUsers = users.filter(user =>
+    user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+    user.lastName.toLowerCase().includes(search.toLowerCase()) ||
+    user.email.toLowerCase().includes(search.toLowerCase())
+  )
+
+
   if (loading) return <div className="app"><h1>Chargement...</h1></div>
   if (error) return <div className="app"><h1>Erreur: {error}</h1></div>
   if (users.length === 0) return <div className="app"><p>Aucun utilisateur trouvé.</p></div>
  
-  return (
+  
+return (
     <div className="app">
       <h1>Liste des utilisateurs</h1>
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Rechercher par nom, prénom ou email"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
       <div className="users-grid">
-        {users.map(user => (
+        {filteredUsers.map(user => (
           <UserCard key={user.id} user={user} />
         ))}
       </div>
     </div>
   )
 }
+
