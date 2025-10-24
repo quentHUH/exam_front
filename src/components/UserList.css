@@ -26,14 +26,14 @@ h1 {
   color: red;
 }
 
-
-.search-bar {
+.controls {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.search-bar input {
+.controls input {
   padding: 0.5rem;
   font-size: 1rem;
   width: 300px;
@@ -41,4 +41,9 @@ h1 {
   border-radius: 4px;
 }
 
-
+.controls select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
