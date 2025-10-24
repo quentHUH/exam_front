@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react'
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import { fetchUsers } from './data/recupApi'
-import type { User } from './model/user'
-import UserCard  from './components/UserCard'
+import { UserList } from './components/UserList'
+import UserDetail from './components/UserDetail'
 
 function App() {
-  const [users, setUsers] = useState<User[]>([])
-
-  useEffect(() => {
-    fetchUsers()
-      .then((u) => { setUsers(u) })
-  }, [])
-
- 
   return (
-    <div className="app">
-      <h1>Liste des utilisateurs</h1>
-      <div className="users-grid">
-        {users.map(user => (
-          <UserCard key={user.id} user={user} />
-        ))}
-      </div>
-    </div>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<UserList />} />
+        <Route path="/users/:id" element={<UserDetail />} />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 
