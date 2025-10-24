@@ -7,12 +7,23 @@ import './UserList.css';
 
 export const UserList = () => {
   const [users, setUsers] = useState<User[]>([])
+  const [ loading, setLoading ] = useState<boolean>(true);
+  const [ error, setError ] = useState<string | null>(null);
 
   useEffect(() => {
+    let mounted = true
+    setLoading(true)
     fetchUsers()
-      .then((u) => { setUsers(u) })
+      .then((u) => { if (mounted) setUsers(u) })
+      .catch((e) => { if (mounted) setError(String(e)) })
+      .finally(() => { if (mounted) setLoading(false) })
+
+    return () => { mounted = false }
   }, [])
 
+  if (loading) return <div className="app"><h1>Chargement...</h1></div>
+  if (error) return <div className="app"><h1>Erreur: {error}</h1></div>
+  if (users.length === 0) return <div className="app"><p>Aucun utilisateur trouvé.</p></div>
  
   return (
     <div className="app">

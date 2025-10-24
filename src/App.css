@@ -2,15 +2,16 @@
 .app {
 	padding: 1rem;
 	width: 100%;
-	box-sizing: border-box;
 	margin: 0 auto;
+
 }
 
 .users-grid {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr); /* two cards per row */
+	grid-template-columns: repeat(3, 1fr); /* two cards per row */
 	gap: 1rem;
 	width: 100%;
+  max-width: 100%;
 }
 
 /* Responsive: single column on narrow screens */
