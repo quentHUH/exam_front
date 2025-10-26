@@ -1,14 +1,40 @@
+/* === Thèmes === */
+.theme-light {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --card-bg-color: #f9f9f9;
+    --card-border-color: #ccc;
+    --button-bg-color: #007bff;
+    --button-text-color: #ffffff;
+    --button-hover-color: #0056b3;
+}
+
+.theme-dark {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+    --card-bg-color: #1e1e1e;
+    --card-border-color: #444;
+    --button-bg-color: #252525;
+    --button-text-color: #ffffff;
+    --button-hover-color: #4c4c4c;
+}
+
 /* === Base === */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: var(--bg-color, #ffffff);
-    color: var(--text-color, #000000);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .app {
-    padding: 2rem;
+    padding: 0rem;
 }
 
 /* === Titres === */
@@ -50,32 +76,47 @@ h4 {
     border-radius: 4px;
 }
 
+.controls input {
+    width: 300px;
+}
+
 /* === Grille des utilisateurs === */
 .users-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* three cards per row */
     gap: 1rem;
     width: 90%;
     max-width: 90%;
     justify-self: center;
 }
 
+@media (max-width: 1200px) {
+    .users-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .users-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 
 /* === Carte utilisateur === */
 .user-card {
-    border: 1px solid #ccc;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    color: var(--text-color);
     padding: 1rem;
     border-radius: 8px;
-    background-color: #f9f9f9;
     display: flex;
     align-items: flex-start;
     gap: 0.75rem;
     overflow: hidden;
 }
+
 .user-card img {
     flex: 0 0 70px;
-    /* fixed width for image on the left */
     height: 70px;
     object-fit: cover;
     border-radius: 6px;
@@ -86,10 +127,6 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.user-card h3 {
-    margin: 0 0 0.25rem 0;
 }
 
 .user-card h3 {
@@ -109,10 +146,13 @@ h4 {
     margin: 0.15rem 0;
 }
 
+/* === Actions dans la carte === */
 .card-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.4rem;
+    gap: 0.5rem;
 }
 
 .action-btn {
@@ -125,10 +165,17 @@ h4 {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
 }
 
-.favorite-btn {
-    background-color: #ffeeba;
+.action-btn:hover {
+    background-color: var(--button-hover-color);
+}
+
+.theme-btn{
+    margin: 1rem;
+
 }
 
 /* === Pagination === */
@@ -142,55 +189,41 @@ h4 {
 .pagination button {
     padding: 0.5rem 1rem;
     border: none;
-    background-color: #eee;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     cursor: pointer;
     border-radius: 4px;
 }
 
 .pagination button.active {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--button-hover-color);
+    color: var(--button-text-color);
 }
 
 /* === Page de détail utilisateur === */
 .user-detail {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  color: #333;
-  border: 1px solid #ccc;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
 }
 
 .user-detail h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .user-detail p {
-  font-size: 1rem;
-  margin: 0.5rem 0;
+    font-size: 1rem;
+    margin: 0.5rem 0;
 }
 
 .user-detail h4 {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 0.3rem;
-}
-
-@media (max-width: 1200px) {
-    .users-grid {
-        grid-template-columns: repeat(2, 1fr);
-        /* three cards per row */
-    }
-}
-
-@media (max-width: 800px) {
-    .users-grid {
-        grid-template-columns: repeat(1, 1fr);
-        /* three cards per row */
-    }
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--card-border-color);
+    padding-bottom: 0.3rem;
 }
