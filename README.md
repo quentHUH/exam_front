@@ -1,73 +1,34 @@
-# React + TypeScript + Vite
+# Exam Front - Application de Gestion des Utilisateurs
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une application React développée avec TypeScript et Vite pour afficher et gérer une liste d'utilisateurs récupérés depuis une API externe.
 
-Currently, two official plugins are available:
+## Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Affichage des utilisateurs** : Liste des utilisateurs présentée sous forme de grille avec pagination (9 utilisateurs par page pour des raisons esthetiques).
+- **Recherche** : Recherche en temps réel par prénom, nom ou email.
+- **Tri** : Tri par nom, âge ou favoris.
+- **Favoris** : Possibilité de marquer des utilisateurs comme favoris (stockés localement).
+- **Thème** : Basculement entre mode clair et sombre (aussi stockés localement).
+- **Détails utilisateur** : Page dédiée affichant les informations complètes d'un utilisateur (âge, email, téléphone, entreprise, adresse).
+- **Gestion d'erreurs** : Affichage des erreurs et bouton de réessai en cas de problème de chargement.
 
-## React Compiler
+## Technologies utilisées
+- React 19
+- TypeScript
+- Vite
+- React Router DOM
+- API DummyJSON pour les données utilisateurs
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation et exécution
 
-## Expanding the ESLint configuration
+1. Installer les dépendances :
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. Lancer l'application en mode développement :
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. Ouvrir [http://localhost:5173](http://localhost:5173) dans votre navigateur.
