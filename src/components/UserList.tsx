@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { fetchUsers } from '../data/recupApi'
 import type { User } from '../model/user'
 import UserCard from './UserCard'
@@ -40,7 +40,8 @@ export const UserList = () => {
 
 
 
-  const filteredUsers = users
+const filteredUsers = useMemo(() => {
+  return users
     .filter(user =>
       user.firstName.toLowerCase().includes(search.toLowerCase()) ||
       user.lastName.toLowerCase().includes(search.toLowerCase()) ||
@@ -52,13 +53,14 @@ export const UserList = () => {
         if (favorites.length === 0) return a.lastName.localeCompare(b.lastName)
         const aFav = favorites.includes(a.id) ? 1 : 0
         const bFav = favorites.includes(b.id) ? 1 : 0
-        return bFav - aFav // les favoris en premier
+        return bFav - aFav
       }
       if (sortBy === "name") {
         return a.lastName.localeCompare(b.lastName)
       }
       return a.age - b.age
     })
+}, [users, search, sortBy])
 
 
 
