@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { fetchUsers } from '../data/recupApi'
 import type { User } from '../model/user'
 import UserCard from './UserCard'
-import './UserList.css';
-
+import '../styles.css';
+//import './UserList.css';
 
 export const UserList = () => {
   const [users, setUsers] = useState<User[]>([])

@@ -1,7 +1,8 @@
 import type { User } from '../model/user'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import './UserCard.css'
+import '../styles.css';
+//import './UserCard.css';
 
 type Props = {
   user: User

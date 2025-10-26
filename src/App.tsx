@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
+import './styles.css'
+//import './App.css';
 import { UserList } from './components/UserList'
 import UserDetail from './components/UserDetail'
 
