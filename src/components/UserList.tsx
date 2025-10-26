@@ -73,7 +73,7 @@ export const UserList = () => {
 
 
 
-  if (loading) return <div className="app"><h1>Chargement...</h1></div>
+  if (loading) return <div className="spinner" />
   if (error) return <div className="app"><h1>Erreur: {error}</h1></div>
   if (users.length === 0) return <div className="app"><p>Aucun utilisateur trouvé.</p></div>
 

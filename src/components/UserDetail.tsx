@@ -34,7 +34,7 @@ function UserDetail() {
     loadUser();
   }, [id]);
 
-  if (loading) return <div className="loading"><h1>Chargement des détails...</h1></div>;
+  if (loading) return <div className="spinner" />
   if (error) return <div className="error">{error}</div>;
   if (!user) return <div>Aucun utilisateur trouvé.</div>;
 
@@ -57,7 +57,7 @@ function UserDetail() {
         <p><strong>État :</strong> {user.address.state}</p>
         <p><strong>Pays :</strong> {user.address.country}</p>
         <Link to={`/`}>
-        <button className="action-btn">Retour</button>
+          <button className="action-btn">Retour</button>
         </Link>
       </div>
     </div>
