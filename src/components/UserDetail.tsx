@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchUserById } from "../data/recupApi";
 import type { User } from "../model/user";
 import { Link } from 'react-router-dom';
+import '../styles.css';
 
 
 function UserDetail() {
@@ -38,7 +39,7 @@ function UserDetail() {
   if (!user) return <div>Aucun utilisateur trouvé.</div>;
 
   return (
-    <div className="user-card">
+    <div className="user-detail">
       <img src={user.image} alt={`${user.firstName} ${user.lastName}`} className="user-image" />
 
       <div className="user-content">
@@ -56,7 +57,7 @@ function UserDetail() {
         <p><strong>État :</strong> {user.address.state}</p>
         <p><strong>Pays :</strong> {user.address.country}</p>
         <Link to={`/`}>
-        <button>Retour</button>
+        <button className="action-btn">Retour</button>
         </Link>
       </div>
     </div>

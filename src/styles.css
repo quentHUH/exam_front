@@ -152,6 +152,35 @@ h4 {
     color: white;
 }
 
+/* === Page de détail utilisateur === */
+.user-detail {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.user-detail h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.user-detail p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.user-detail h4 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.3rem;
+}
+
 @media (max-width: 1200px) {
     .users-grid {
         grid-template-columns: repeat(2, 1fr);
