@@ -8,16 +8,34 @@ import { Link } from 'react-router-dom';
 function UserDetail() {
   const { id } = useParams();
   const [user, setUser] = useState<User | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+
 
   useEffect(() => {
-    if (id) {
-      fetchUserById(parseInt(id)).then((u) => setUser(u));
-    }
+    const loadUser = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        if (id) {
+          const data = await fetchUserById(parseInt(id));
+          setUser(data);
+        }
+      } catch (err) {
+        console.error("Erreur lors du chargement de l'utilisateur :", err);
+        setError("Impossible de récupérer les détails de l'utilisateur.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUser();
   }, [id]);
 
-  if (!user) {
-    return <div>Chargement...</div>;
-  }
+  if (loading) return <div className="loading"><h1>Chargement des détails...</h1></div>;
+  if (error) return <div className="error">{error}</div>;
+  if (!user) return <div>Aucun utilisateur trouvé.</div>;
 
   return (
     <div className="user-card">

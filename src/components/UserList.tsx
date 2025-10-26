@@ -17,16 +17,25 @@ export const UserList = () => {
 
 
 
-  useEffect(() => {
-    let mounted = true
-    setLoading(true)
-    fetchUsers()
-      .then((u) => { if (mounted) setUsers(u) })
-      .catch((e) => { if (mounted) setError(String(e)) })
-      .finally(() => { if (mounted) setLoading(false) })
 
-    return () => { mounted = false }
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        setLoading(true)
+        setError(null) // reset error before fetch
+        const data = await fetchUsers()
+        setUsers(data)
+      } catch (err) {
+        console.error("Erreur lors du chargement des utilisateurs :", err)
+        setError("Impossible de récupérer les utilisateurs. Veuillez réessayer plus tard.")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadUsers()
   }, [])
+
 
 
 
