@@ -7,10 +7,13 @@ import UserDetail from './components/UserDetail'
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    return localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
+  })
 
   useEffect(() => {
     document.body.className = `theme-${theme}`
+    localStorage.setItem('theme', theme)
   }, [theme])
 
   const toggleTheme = () => {
