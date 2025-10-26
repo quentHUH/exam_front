@@ -10,7 +10,7 @@ export const UserList = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
-  const [sortBy, setSortBy] = useState<"name" | "age">("name")
+  const [sortBy, setSortBy] = useState<"name" | "age" | "favorites">("name")
   const [currentPage, setCurrentPage] = useState<number>(1)
   const usersPerPage = 9 //j'ai mis 9 et non 10 comme dans l'énoncé car j'ai des lignes de 3 cards dans la grille
   // et ce serait plus esthétique avec 3 lignes pleines
@@ -46,12 +46,19 @@ export const UserList = () => {
       user.email.toLowerCase().includes(search.toLowerCase())
     )
     .sort((a, b) => {
+      if (sortBy === "favorites") {
+        const favorites = JSON.parse(localStorage.getItem("favorites") || "[]")
+        if (favorites.length === 0) return a.lastName.localeCompare(b.lastName)
+        const aFav = favorites.includes(a.id) ? 1 : 0
+        const bFav = favorites.includes(b.id) ? 1 : 0
+        return bFav - aFav // les favoris en premier
+      }
       if (sortBy === "name") {
         return a.lastName.localeCompare(b.lastName)
-      } else {
-        return a.age - b.age
       }
+      return a.age - b.age
     })
+
 
 
   const indexOfLastUser = currentPage * usersPerPage
@@ -72,7 +79,7 @@ export const UserList = () => {
 
 
 
-return (
+  return (
     <div className="app">
       <h1>Liste des utilisateurs</h1>
 
@@ -83,13 +90,14 @@ return (
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
-            setCurrentPage(1) 
+            setCurrentPage(1)
           }}
         />
 
-<select value={sortBy} onChange={(e) => setSortBy(e.target.value as "name" | "age")}>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value as "name" | "age" | "favorites")}>
           <option value="name">Trier par nom</option>
           <option value="age">Trier par âge</option>
+          <option value="favorites">Trier par favoris</option>
         </select>
       </div>
 
@@ -99,7 +107,7 @@ return (
         ))}
       </div>
 
-      
+
       <div className="pagination">
         {Array.from({ length: totalPages }, (_, i) => (
           <button key={i}
@@ -110,7 +118,7 @@ return (
         ))}
       </div>
     </div>
-  //tous les bouton sont mis a la suite pour naviguer plus rapidement je changerais peut-etre pas la suite
+    //tous les bouton sont mis a la suite pour naviguer plus rapidement je changerais peut-etre pas la suite
   )
 }
 

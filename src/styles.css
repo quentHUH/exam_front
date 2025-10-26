@@ -114,6 +114,11 @@ h4 {
     gap: 0.75rem;
     overflow: hidden;
 }
+.user-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
+}
 
 .user-card img {
     flex: 0 0 70px;
