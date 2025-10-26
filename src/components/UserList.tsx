@@ -8,6 +8,7 @@ import '../styles.css';
 export const UserList = () => {
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState<boolean>(true);
+  const [reloadKey, setReloadKey] = useState<number>(0)
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState<string>("");
   const [sortBy, setSortBy] = useState<"name" | "age" | "favorites">("name")
@@ -34,7 +35,7 @@ export const UserList = () => {
     }
 
     loadUsers()
-  }, [])
+  }, [reloadKey])
 
 
 
@@ -74,7 +75,13 @@ export const UserList = () => {
 
 
   if (loading) return <div className="spinner" />
-  if (error) return <div className="app"><h1>Erreur: {error}</h1></div>
+  if (error) {
+    return (
+      <div className="error-block">
+        <p className="error">{error}</p>
+        <button className ='action-btn'  onClick={() => setReloadKey(prev => prev + 1)}>Réessayer</button>
+      </div>)
+  }
   if (users.length === 0) return <div className="app"><p>Aucun utilisateur trouvé.</p></div>
 
 

@@ -11,6 +11,7 @@ function UserDetail() {
   const [user, setUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [reloadKey, setReloadKey] = useState<number>(0)
 
 
 
@@ -32,10 +33,20 @@ function UserDetail() {
     };
 
     loadUser();
-  }, [id]);
+  }, [id, reloadKey]);
 
   if (loading) return <div className="spinner" />
-  if (error) return <div className="error">{error}</div>;
+
+if (error) {
+  return (
+    <div className="error-block">
+      <p className="error">{error}</p>
+      <button className="action-btn" onClick={() => setReloadKey(prev => prev + 1)}>
+        Réessayer
+      </button>
+    </div>)
+}
+
   if (!user) return <div>Aucun utilisateur trouvé.</div>;
 
   return (
